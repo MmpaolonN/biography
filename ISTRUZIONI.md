@@ -209,25 +209,51 @@ diciamo a Vite, il sito compilato cerca i propri file CSS/JS a partire dalla
 radice del dominio e non li trova: la pagina si carica ma appare vuota o
 rotta.
 
-Apri [vite.config.ts](vite.config.ts) e aggiungi la proprietà `base` con il
-nome esatto del tuo repository (quello scelto al passo 3), tra slash:
+Apri [vite.config.ts](vite.config.ts). Il file, **al completo**, deve
+somigliare a questo (solo la riga `base` va aggiunta/modificata, tutto il
+resto — `react()`, `VitePWA({...})` — deve restare **esattamente com'era**):
 
 ```ts
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import { VitePWA } from 'vite-plugin-pwa'
+
 export default defineConfig({
   base: '/ritratti/', // <-- sostituisci con il nome del tuo repository
   plugins: [
-    // ...
+    react(),
+    VitePWA({
+      // ...tutta la configurazione che c'era già, invariata...
+    }),
   ],
 })
 ```
 
-Se in futuro pubblichi invece su un repository chiamato esattamente
-`tuonome.github.io` (il cosiddetto "sito utente", che vive alla radice del
-dominio), questa riga va rimossa o impostata su `'/'`.
+> ⚠️ **Errore facile da fare, e che è già successo in questo progetto:**
+> se cancelli per sbaglio `react()` e `VitePWA({...})` dall'array
+> `plugins`, lasciando solo un commento tipo `// ...`, il progetto smette
+> di compilare: `react` e `VitePWA` restano importati in cima al file ma
+> "non usati", e TypeScript blocca la build con un errore
+> (`'react' is declared but its value is never read`). Prima di salvare,
+> controlla che l'array `plugins` contenga ancora `react()` e il blocco
+> `VitePWA({ ... })`: **stai solo aggiungendo la riga `base`**, non
+> sostituendo il resto del file.
 
-Dopo questa modifica, salva, poi ripeti i comandi del passo 5 e 6
-(`git add .`, `git commit -m "Imposta base path per GitHub Pages"`,
-`git push`) per inviare anche questa modifica.
+Dopo questa modifica, **verifica sempre in locale prima di inviare il
+codice**, lanciando:
+
+```bash
+npm run build
+```
+
+Se questo comando finisce senza errori (vedrai una riga `✓ built in ...ms`),
+puoi procedere. Se invece dà errore, il problema va risolto qui, sul tuo PC:
+inviare comunque il codice a GitHub significherebbe far fallire anche la
+pubblicazione automatica, esattamente con lo stesso errore.
+
+Solo a build riuscita, ripeti i comandi del passo 5 e 6 (`git add .`,
+`git commit -m "Imposta base path per GitHub Pages"`, `git push`) per
+inviare la modifica.
 
 ---
 
@@ -237,6 +263,15 @@ Dopo questa modifica, salva, poi ripeti i comandi del passo 5 e 6
 come sito, usando il workflow di GitHub Actions che ho già preparato" invece
 di un metodo di pubblicazione diverso.
 
+> ⚠️ **Questo passaggio è indipendente dal codice e va fatto una volta sola
+> sul sito di GitHub, con un clic — non nel terminale.** Se lo salti, il
+> primo `push` fa comunque partire il workflow, ma questo si ferma a metà
+> con un errore del tipo "Get Pages site failed" nel passaggio chiamato
+> **"Prepara Pages"**: in pratica GitHub prova a pubblicare su un indirizzo
+> che non esiste ancora, perché nessuno gli ha detto di crearlo. La build
+> del codice può quindi risultare riuscita e il deploy fallire lo stesso: se
+> vedi questo errore specifico nei log, il problema è qui, non nel codice.
+
 1. Vai sulla pagina del tuo repository su GitHub.
 2. Clicca **Settings** (in alto) → nel menu a sinistra **Pages**.
 3. Sotto **Build and deployment → Source**, seleziona **GitHub Actions**
@@ -244,7 +279,10 @@ di un metodo di pubblicazione diverso.
 
 Non serve altro: il file `.github/workflows/deploy.yml` già presente nel
 progetto si occuperà da qui in avanti di tutto il resto ogni volta che invii
-codice nuovo con `git push`.
+codice nuovo con `git push`. Se avevi già fatto un push prima di completare
+questo passaggio, non preoccuparti: non serve rifare il push, basta
+rilanciare manualmente l'ultima esecuzione fallita (scheda **Actions** →
+apri l'esecuzione fallita → pulsante **Re-run all jobs** in alto a destra).
 
 ---
 
@@ -316,6 +354,27 @@ repository. Controlla che corrisponda esattamente, comprese maiuscole/
 minuscole.
 
 **Il workflow in Actions fallisce (X rossa)** — clicca sull'esecuzione
-fallita, poi sul passaggio con la X per leggere l'errore specifico: quasi
-sempre è un errore di compilazione TypeScript che si vedrebbe già lanciando
-`npm run build` in locale prima di inviare il codice.
+fallita, poi sul passaggio con la X per leggere l'errore specifico. I due
+casi già osservati su questo progetto sono i seguenti due punti; per
+qualunque altro errore, il messaggio nel log del passaggio "Build" descrive
+quasi sempre esattamente cosa non va, ed è lo stesso identico errore che
+otterresti lanciando `npm run build` sul tuo PC prima di inviare il codice —
+motivo in più per lanciare sempre `npm run build` in locale prima di ogni
+`git push`.
+
+**Il passaggio "Build" fallisce con un errore di TypeScript tipo `'react' is
+declared but its value is never read`** — è successo la prima volta che è
+stato modificato `vite.config.ts` per aggiungere il `base` path (passo 7):
+l'array `plugins` era rimasto con solo un commento al posto di `react()` e
+`VitePWA({...})`, quindi quei due import in cima al file risultavano "mai
+usati" e TypeScript blocca la build per sicurezza. La correzione è
+ripristinare `plugins: [react(), VitePWA({ ... })]` con la configurazione
+PWA completa, lasciando invariata solo l'aggiunta della riga `base`.
+
+**Il passaggio "Build" riesce ma il passaggio "Prepara Pages" fallisce con
+un errore tipo `Get Pages site failed`** — significa che il passo 8
+(Settings → Pages → Source: GitHub Actions) non è ancora stato completato:
+il repository non ha ancora un sito Pages configurato a cui GitHub possa
+pubblicare il risultato. Completa il passo 8, poi rilancia l'esecuzione
+fallita da Actions con **Re-run all jobs**, senza bisogno di un nuovo
+`push`.
