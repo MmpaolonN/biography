@@ -1,6 +1,10 @@
 import type { Categoria } from "../data/personaggi";
 
 const CARTELLA_PER_CATEGORIA: Partial<Record<Categoria, string>> = {
+  Scienziato: "scienziati",
+  Filosofo: "filosofi",
+  Attivista: "attivisti",
+  Politico: "politici",
   "Persona attuale": "persone-attuali",
   Azienda: "aziende",
 };

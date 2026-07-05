@@ -22,8 +22,6 @@ export interface Personaggio {
   fama: number;
 }
 
-const WIKI = "https://it.wikipedia.org/wiki/";
-
 export const personaggi: Personaggio[] = [
   // ===================== SCIENZIATI (80 · 40%) =====================
   { id: "albert-einstein", nome: "Albert Einstein", categoria: "Scienziato", contenutoCurato: true, fama: 1 },
@@ -227,31 +225,31 @@ export const personaggi: Personaggio[] = [
   { id: "simon-bolivar", nome: "Simón Bolívar", categoria: "Politico", contenutoCurato: true, fama: 4 },
   { id: "thomas-jefferson", nome: "Thomas Jefferson", categoria: "Politico", contenutoCurato: true, fama: 4 },
 
-  { id: "robespierre", nome: "Maximilien de Robespierre", categoria: "Politico", url: WIKI + "Maximilien_de_Robespierre", fama: 5 },
-  { id: "jean-jaures", nome: "Jean Jaurès", categoria: "Politico", url: WIKI + "Jean_Jaurès", fama: 5 },
-  { id: "willy-brandt", nome: "Willy Brandt", categoria: "Politico", url: WIKI + "Willy_Brandt", fama: 5 },
-  { id: "golda-meir", nome: "Golda Meir", categoria: "Politico", url: WIKI + "Golda_Meir", fama: 5 },
-  { id: "indira-gandhi", nome: "Indira Gandhi", categoria: "Politico", url: WIKI + "Indira_Gandhi", fama: 5 },
-  { id: "deng-xiaoping", nome: "Deng Xiaoping", categoria: "Politico", url: WIKI + "Deng_Xiaoping", fama: 5 },
-  { id: "aldo-moro", nome: "Aldo Moro", categoria: "Politico", url: WIKI + "Aldo_Moro", fama: 5 },
-  { id: "alcide-de-gasperi", nome: "Alcide De Gasperi", categoria: "Politico", url: WIKI + "Alcide_De_Gasperi", fama: 5 },
+  { id: "robespierre", nome: "Maximilien de Robespierre", categoria: "Politico", contenutoCurato: true, fama: 5 },
+  { id: "jean-jaures", nome: "Jean Jaurès", categoria: "Politico", contenutoCurato: true, fama: 5 },
+  { id: "willy-brandt", nome: "Willy Brandt", categoria: "Politico", contenutoCurato: true, fama: 5 },
+  { id: "golda-meir", nome: "Golda Meir", categoria: "Politico", contenutoCurato: true, fama: 5 },
+  { id: "indira-gandhi", nome: "Indira Gandhi", categoria: "Politico", contenutoCurato: true, fama: 5 },
+  { id: "deng-xiaoping", nome: "Deng Xiaoping", categoria: "Politico", contenutoCurato: true, fama: 5 },
+  { id: "aldo-moro", nome: "Aldo Moro", categoria: "Politico", contenutoCurato: true, fama: 5 },
+  { id: "alcide-de-gasperi", nome: "Alcide De Gasperi", categoria: "Politico", contenutoCurato: true, fama: 5 },
 
-  { id: "palmiro-togliatti", nome: "Palmiro Togliatti", categoria: "Politico", url: WIKI + "Palmiro_Togliatti", fama: 6 },
-  { id: "sandro-pertini", nome: "Sandro Pertini", categoria: "Politico", url: WIKI + "Sandro_Pertini", fama: 6 },
-  { id: "giovanni-giolitti", nome: "Giovanni Giolitti", categoria: "Politico", url: WIKI + "Giovanni_Giolitti", fama: 6 },
-  { id: "benito-mussolini", nome: "Benito Mussolini", categoria: "Politico", url: WIKI + "Benito_Mussolini", fama: 6 },
-  { id: "francisco-franco", nome: "Francisco Franco", categoria: "Politico", url: WIKI + "Francisco_Franco", fama: 6 },
-  { id: "fidel-castro", nome: "Fidel Castro", categoria: "Politico", url: WIKI + "Fidel_Castro", fama: 6 },
-  { id: "ho-chi-minh", nome: "Ho Chi Minh", categoria: "Politico", url: WIKI + "Ho_Chi_Minh", fama: 6 },
-  { id: "konrad-adenauer", nome: "Konrad Adenauer", categoria: "Politico", url: WIKI + "Konrad_Adenauer", fama: 6 },
-  { id: "helmut-kohl", nome: "Helmut Kohl", categoria: "Politico", url: WIKI + "Helmut_Kohl", fama: 6 },
-  { id: "angela-merkel", nome: "Angela Merkel", categoria: "Politico", url: WIKI + "Angela_Merkel", fama: 6 },
-  { id: "barack-obama", nome: "Barack Obama", categoria: "Politico", url: WIKI + "Barack_Obama", fama: 6 },
-  { id: "ronald-reagan", nome: "Ronald Reagan", categoria: "Politico", url: WIKI + "Ronald_Reagan", fama: 6 },
-  { id: "bill-clinton", nome: "Bill Clinton", categoria: "Politico", url: WIKI + "Bill_Clinton", fama: 6 },
-  { id: "talleyrand", nome: "Talleyrand", categoria: "Politico", url: WIKI + "Talleyrand", fama: 6 },
-  { id: "metternich", nome: "Klemens von Metternich", categoria: "Politico", url: WIKI + "Klemens_von_Metternich", fama: 6 },
-  { id: "anwar-al-sadat", nome: "Anwar al-Sadat", categoria: "Politico", url: WIKI + "Anwar_al-Sadat", fama: 6 },
+  { id: "palmiro-togliatti", nome: "Palmiro Togliatti", categoria: "Politico", contenutoCurato: true, fama: 6 },
+  { id: "sandro-pertini", nome: "Sandro Pertini", categoria: "Politico", contenutoCurato: true, fama: 6 },
+  { id: "giovanni-giolitti", nome: "Giovanni Giolitti", categoria: "Politico", contenutoCurato: true, fama: 6 },
+  { id: "benito-mussolini", nome: "Benito Mussolini", categoria: "Politico", contenutoCurato: true, fama: 6 },
+  { id: "francisco-franco", nome: "Francisco Franco", categoria: "Politico", contenutoCurato: true, fama: 6 },
+  { id: "fidel-castro", nome: "Fidel Castro", categoria: "Politico", contenutoCurato: true, fama: 6 },
+  { id: "ho-chi-minh", nome: "Ho Chi Minh", categoria: "Politico", contenutoCurato: true, fama: 6 },
+  { id: "konrad-adenauer", nome: "Konrad Adenauer", categoria: "Politico", contenutoCurato: true, fama: 6 },
+  { id: "helmut-kohl", nome: "Helmut Kohl", categoria: "Politico", contenutoCurato: true, fama: 6 },
+  { id: "angela-merkel", nome: "Angela Merkel", categoria: "Politico", contenutoCurato: true, fama: 6 },
+  { id: "barack-obama", nome: "Barack Obama", categoria: "Politico", contenutoCurato: true, fama: 6 },
+  { id: "ronald-reagan", nome: "Ronald Reagan", categoria: "Politico", contenutoCurato: true, fama: 6 },
+  { id: "bill-clinton", nome: "Bill Clinton", categoria: "Politico", contenutoCurato: true, fama: 6 },
+  { id: "talleyrand", nome: "Talleyrand", categoria: "Politico", contenutoCurato: true, fama: 6 },
+  { id: "metternich", nome: "Klemens von Metternich", categoria: "Politico", contenutoCurato: true, fama: 6 },
+  { id: "anwar-al-sadat", nome: "Anwar al-Sadat", categoria: "Politico", contenutoCurato: true, fama: 6 },
 
   // ===================== PERSONE ATTUALI (30 · contenuto curato) =====================
   // Big data applicato a intelligenza artificiale, psicologia, genomica e
