@@ -10,23 +10,13 @@ function mescola<T>(elementi: T[]): T[] {
 }
 
 /**
- * Pesca fino a 4 personaggi distinti dal pool, partendo dalla fascia di fama
- * più bassa (più famosi) ancora disponibile e completando con le fasce
- * successive se in quella fascia ce ne sono meno di 4.
+ * Pesca fino a 4 personaggi distinti a caso dall'intero pool disponibile,
+ * ignorando la fascia di fama: ogni estrazione è indipendente dalle
+ * precedenti e dal ricaricamento della pagina.
  */
 export function pescaQuattro(pool: Personaggio[]): Personaggio[] {
   const numeroDaPescare = Math.min(4, pool.length);
   if (numeroDaPescare === 0) return [];
 
-  const fasceDisponibili = Array.from(new Set(pool.map((p) => p.fama))).sort(
-    (a, b) => a - b,
-  );
-
-  let candidati: Personaggio[] = [];
-  for (const fama of fasceDisponibili) {
-    candidati = candidati.concat(pool.filter((p) => p.fama === fama));
-    if (candidati.length >= numeroDaPescare) break;
-  }
-
-  return mescola(candidati).slice(0, numeroDaPescare);
+  return mescola(pool).slice(0, numeroDaPescare);
 }
