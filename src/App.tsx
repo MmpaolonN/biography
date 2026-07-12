@@ -12,6 +12,7 @@ import { Intestazione } from "./components/Intestazione";
 import { FiltroCategorie } from "./components/FiltroCategorie";
 import { CartaPersonaggio } from "./components/CartaPersonaggio";
 import { DettaglioContenuto } from "./components/DettaglioContenuto";
+import { ElencoLetti } from "./components/ElencoLetti";
 import "./App.css";
 
 const ETICHETTA_FILTRO: Record<Filtro, string> = {
@@ -29,6 +30,7 @@ function App() {
   const [filtro, setFiltro] = useState<Filtro>(() => caricaFiltro());
   const [carteAttuali, setCarteAttuali] = useState<Personaggio[]>([]);
   const [dettaglioAttivo, setDettaglioAttivo] = useState<Personaggio | null>(null);
+  const [mostraLetti, setMostraLetti] = useState(false);
 
   useEffect(() => {
     salvaLetti(letti);
@@ -49,6 +51,11 @@ function App() {
   const poolDisponibile = useMemo(
     () => personaggiFiltrati.filter((p) => !letti.has(p.id)),
     [personaggiFiltrati, letti],
+  );
+
+  const personaggiLetti = useMemo(
+    () => personaggi.filter((p) => letti.has(p.id)),
+    [letti],
   );
 
   const lettiTotali = letti.size;
@@ -86,6 +93,7 @@ function App() {
     if (!conferma) return;
     setLetti(new Set());
     setCarteAttuali([]);
+    setMostraLetti(false);
   }
 
   const categoriaEsaurita = poolDisponibile.length === 0;
@@ -96,6 +104,19 @@ function App() {
         <DettaglioContenuto
           personaggio={dettaglioAttivo}
           onTornaAlMazzo={() => setDettaglioAttivo(null)}
+          testoTorna={mostraLetti ? "← Torna alle tue letture" : "← Torna al mazzo"}
+        />
+      </div>
+    );
+  }
+
+  if (mostraLetti) {
+    return (
+      <div className="app">
+        <ElencoLetti
+          personaggiLetti={personaggiLetti}
+          onApri={(personaggio) => setDettaglioAttivo(personaggio)}
+          onChiudi={() => setMostraLetti(false)}
         />
       </div>
     );
@@ -108,6 +129,7 @@ function App() {
         totale={totaleGenerale}
         onReimposta={reimposta}
         mostraReimposta={lettiTotali > 0}
+        onMostraLetti={() => setMostraLetti(true)}
       />
 
       <main className="contenuto">
@@ -168,9 +190,8 @@ function App() {
           <div className="pannello-stato">
             <h2>{lettiTotali === 0 ? "Pronto a iniziare?" : "Continua a scoprire"}</h2>
             <p>
-              Pesca 4 personaggi e scegline uno per leggere la sua biografia:
-              su Wikipedia per le categorie storiche, dentro l'app per le
-              persone attuali e le aziende.
+              Pesca 4 personaggi e scegline uno per leggere la sua biografia,
+              scritta e curata direttamente dentro l'app.
             </p>
             <button
               type="button"
@@ -195,11 +216,8 @@ function App() {
 
       <footer className="piede">
         <p>
-          Le categorie storiche rimandano a{" "}
-          <a href="https://it.wikipedia.org" target="_blank" rel="noopener">
-            Wikipedia in italiano
-          </a>
-          ; persone attuali e aziende hanno una scheda curata dentro l'app.
+          Tutte le schede sono scritte e curate direttamente dentro l'app,
+          senza collegamenti esterni.
         </p>
       </footer>
     </div>

@@ -41,6 +41,13 @@
   gap: 10px;
 }
 
+.intestazione-bottoni {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
 .contatore {
   font-family: var(--font-mono);
   font-size: 0.9rem;
@@ -50,6 +57,69 @@
   border: 1px solid var(--colore-bordo);
   padding: 6px 12px;
   border-radius: 999px;
+}
+
+/* ------------------------------ Elenco letti ------------------------------ */
+
+.elenco-letti {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 20px;
+}
+
+.elenco-letti-intestazione h2 {
+  font-size: clamp(1.8rem, 5vw, 2.4rem);
+  color: var(--colore-inchiostro);
+  margin-bottom: 6px;
+}
+
+.elenco-letti-intestazione p {
+  color: var(--colore-testo-tenue);
+}
+
+.elenco-letti-gruppo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.elenco-letti-titolo-gruppo {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+}
+
+.elenco-letti-lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.elenco-letti-voce {
+  width: 100%;
+  min-height: 44px;
+  text-align: left;
+  padding: 10px 16px;
+  background: #fffdf7;
+  border: 1px solid var(--colore-bordo);
+  border-left: 4px solid var(--colore-carta-badge, var(--colore-accento));
+  border-radius: 8px;
+  font-family: var(--font-serif);
+  font-size: 1.02rem;
+  color: var(--colore-inchiostro);
+  cursor: pointer;
+  transition: background-color 0.12s ease, transform 0.12s ease;
+}
+
+.elenco-letti-voce:hover {
+  background: var(--colore-carta-scura);
+  transform: translateX(2px);
 }
 
 /* -------------------------------- Contenuto ------------------------------ */

@@ -7,11 +7,13 @@ import { renderizzaMarkdown } from "../lib/markdown";
 interface DettaglioContenutoProps {
   personaggio: Personaggio;
   onTornaAlMazzo: () => void;
+  testoTorna?: string;
 }
 
 export function DettaglioContenuto({
   personaggio,
   onTornaAlMazzo,
+  testoTorna = "← Torna al mazzo",
 }: DettaglioContenutoProps) {
   const markdown = ottieniContenutoCurato(personaggio.categoria, personaggio.id);
   const colore = coloreCategoria[personaggio.categoria];
@@ -19,7 +21,7 @@ export function DettaglioContenuto({
   return (
     <article className="dettaglio" style={{ "--colore-carta-badge": colore } as CSSProperties}>
       <button type="button" className="bottone bottone-fantasma" onClick={onTornaAlMazzo}>
-        ← Torna al mazzo
+        {testoTorna}
       </button>
 
       <header className="dettaglio-intestazione">
