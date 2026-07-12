@@ -23,9 +23,7 @@ export function CartaPersonaggio({
       <span className="carta-tacca" aria-hidden="true" />
       <span className="carta-badge">{siglaCategoria[personaggio.categoria]}</span>
       <span className="carta-nome">{personaggio.nome}</span>
-      <span className="carta-suggerimento">
-        {personaggio.contenutoCurato ? "Leggi la scheda →" : "Apri su Wikipedia →"}
-      </span>
+      <span className="carta-suggerimento">Leggi la scheda →</span>
     </button>
   );
 }

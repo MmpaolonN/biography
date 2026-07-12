@@ -2,23 +2,25 @@
 
 Una PWA in italiano per scoprire biografie di personaggi, persone attuali e
 aziende. Pesca 4 voci alla volta (nome + categoria), scegline una per
-leggerne la storia — su Wikipedia per le categorie storiche, in una scheda
-curata scritta internamente e mostrata dentro l'app per le persone attuali e
-le aziende — e continua finché non le hai lette tutte. Nessun account,
-nessun backend: tutto gira nel browser e il progresso resta salvato solo sul
-tuo dispositivo (`localStorage`).
+leggerne la storia in una scheda curata e scritta internamente, mostrata
+dentro l'app — e continua finché non le hai lette tutte. Un bottone
+"Le tue letture" permette in ogni momento di rivedere l'elenco delle schede
+già lette, raggruppate per categoria, e di riaprirle. Nessun account, nessun
+backend: tutto gira nel browser e il progresso resta salvato solo sul tuo
+dispositivo (`localStorage`).
 
 ## Come funziona
 
-- Ad ogni estrazione vengono proposte 4 voci non ancora lette, partendo dalla
-  fascia di celebrità più alta ancora disponibile (campo `fama`: 1 = più
-  famoso/a).
-- Scegliendone una: le categorie storiche (Scienziati, Filosofi, Attivisti,
-  Politici) aprono `it.wikipedia.org` in una nuova scheda; le Persone attuali
-  e le Aziende mostrano una scheda curata **dentro l'app**, scritta a mano
-  (non generata da API esterne a runtime). In entrambi i casi solo quella
-  voce viene segnata come letta: le altre tre tornano nel mazzo.
+- Ad ogni estrazione vengono proposte 4 voci casuali non ancora lette,
+  scelte con probabilità uniforme sull'intero pool disponibile (il campo
+  `fama` è solo un'indicazione di notorietà, non influenza l'estrazione).
+- Scegliendone una, l'app mostra la relativa scheda curata **dentro l'app**,
+  scritta a mano (non generata da API esterne a runtime): solo quella voce
+  viene segnata come letta, le altre tre tornano nel mazzo.
 - Un filtro opzionale per categoria restringe il pool di estrazione.
+- Il bottone "Le tue letture" nell'intestazione apre l'elenco di tutte le
+  schede già lette, raggruppate per categoria, da cui è possibile riaprirle
+  in qualunque momento.
 - Quando il pool (globale o filtrato) si esaurisce, l'app mostra uno stato di
   completamento con la possibilità di azzerare la cronologia.
 
@@ -74,14 +76,12 @@ categorie — Scienziato 29,6% (80), Filosofo 14,8% (40), Attivista 14,8%
 (40), Politico 14,8% (40), Persona attuale 11,1% (30), Azienda 14,8% (40) —
 ciascuna con un livello di `fama` (1 = più nota).
 
-- Per **Scienziato, Filosofo, Attivista, Politico** il campo `url` punta alla
-  voce corrispondente su Wikipedia in italiano.
-- Per **Persona attuale** e **Azienda** il campo `contenutoCurato: true`
-  indica che la biografia è scritta internamente e vive come file Markdown
-  in `src/data/contenuti/persone-attuali/<id>.md` e
-  `src/data/contenuti/aziende/<id>.md`, mostrato dentro l'app da
-  [DettaglioContenuto.tsx](src/components/DettaglioContenuto.tsx). Le 30
-  persone attuali e le 40 aziende coprono big data applicato a intelligenza
+Ogni voce ha `contenutoCurato: true`: la biografia è scritta internamente e
+vive come file Markdown in `src/data/contenuti/<categoria-cartella>/<id>.md`
+(ad esempio `scienziati/`, `filosofi/`, `attivisti/`, `politici/`,
+`persone-attuali/`, `aziende/`), mostrato dentro l'app da
+[DettaglioContenuto.tsx](src/components/DettaglioContenuto.tsx). Le 30
+persone attuali e le 40 aziende coprono big data applicato a intelligenza
   artificiale, psicologia, genomica e longevità, elaborazione del linguaggio
   naturale e neuroscienze.
 

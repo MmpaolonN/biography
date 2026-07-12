@@ -10,11 +10,8 @@ export interface Personaggio {
   id: string;
   nome: string;
   categoria: Categoria;
-  /** Presente per le categorie storiche: link alla voce di Wikipedia in italiano */
-  url?: string;
   /**
-   * Presente per le categorie curate (Persona attuale, Azienda): il contenuto
-   * viene mostrato dentro l'app invece di aprire un link esterno. Il file
+   * Il contenuto della scheda viene mostrato dentro l'app: il file
    * corrispondente vive in src/data/contenuti/<categoria-cartella>/<id>.md
    */
   contenutoCurato?: boolean;

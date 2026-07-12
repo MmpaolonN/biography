@@ -15,7 +15,7 @@ export default defineConfig({
         name: 'Ritratti — Biografie da scoprire',
         short_name: 'Ritratti',
         description:
-          'Pesca personaggi celebri a caso e scopri la loro biografia su Wikipedia.',
+          "Pesca personaggi celebri a caso e scopri la loro biografia, scritta e curata direttamente dentro l'app.",
         lang: 'it',
         start_url: '/',
         scope: '/',

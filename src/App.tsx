@@ -73,12 +73,7 @@ function App() {
       return aggiornati;
     });
     setCarteAttuali([]);
-
-    if (personaggio.contenutoCurato) {
-      setDettaglioAttivo(personaggio);
-    } else {
-      window.open(personaggio.url, "_blank", "noopener");
-    }
+    setDettaglioAttivo(personaggio);
   }
 
   function cambiaFiltro(nuovoFiltro: Filtro) {
